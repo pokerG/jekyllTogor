@@ -1,4 +1,5 @@
-Hello World! post
+---
+layout: post
 title: 初识Go语言[1]
 category : Programming Language
 tagline: "我对Go语言语法的一些看法"
