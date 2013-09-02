@@ -9,6 +9,7 @@ import (
 	//"bytes"
 	"regexp"
 	"strings"
+	"errors"
 )
 
 //Jekyll's Meta data
@@ -36,6 +37,12 @@ type Gor struct {
 //In face the metaEoF should be the second "---"
 var metaEOF string = "{% include JB/setup %}"
 
+//When this md isn't Blog will return errNoMeta
+var errNoMeta = errors.New("Don't find meta data")
+
+// the num of meta data
+var numMeta int
+
 func NewJekyll() *Jekyll {
 	return &Jekyll{layout: "post"}
 }
@@ -60,12 +67,17 @@ func ResetGor(g * Gor){
 	g.tagline = ""
 }
 
+//get gor.date from filename
 func (g *Gor)getDate(filepath string){
 	paths := strings.Split(filepath, "/")
 	fname := paths[len(paths) - 1]
-	fmt.Println(fname)
+	re := regexp.MustCompile(`\d+-\d+-\d+`)
+	data := re.FindString(fname)
+	//fmt.Printf("%q\n", data)
+	g.date= data
 
 }
+
 var myJekyll *Jekyll
 var myGor *Gor
 
@@ -104,7 +116,12 @@ func Tree(dirname string, curHier int) error {
 			if matched {
 				err := Dealwith(filepath.Join(dirAbs, fileInfo.Name()))
 				if err != nil {
-					return err
+					if err == errNoMeta{
+						fmt.Println(err.Error())
+					}else{
+						return err
+					}
+					
 				}
 			}
 
@@ -121,7 +138,7 @@ func Dealwith(fpath string) error {
 		return err
 
 	}
-	defer file.Close()
+	
 
 	//Creat tmp file
 	outname := file.Name() + ".tmp"
@@ -131,22 +148,35 @@ func Dealwith(fpath string) error {
 		fmt.Println(outname, err)
 		return err
 	}
+	//Close the src file ,operate the tmp file
+	file.Close()
+	
 	defer fout.Close()
 
+	// let jekyll's meta data to gor's meta data
 	content, _ := ioutil.ReadFile(file.Name())
 	lines := strings.Split(string(content), "\n")
-	parseJekyll(lines)
+	numMeta,err = parseJekyll(lines)
+	if err != nil{
+		return err
+	}
 	jekyllToGor(file.Name())	
-	//	file.Write(s)
+
+
+	//	file.Write()
+	err = writeFile(fout,lines)
+	if err != nil{
+		return err
+	}
 	return nil
 }
 
-func parseJekyll(lines []string) error{
+func parseJekyll(lines []string)(int,error){
 	ResetJekyll(myJekyll)
-	for _,line := range lines{
+	for i,line := range lines{
 		//fmt.Println(line)
 		if strings.Contains(line, metaEOF){
-			return nil
+			return i,nil
 		}
 		meta := strings.Split(line, ":")
 		switch{
@@ -167,7 +197,7 @@ func parseJekyll(lines []string) error{
 			myJekyll.tags = data
 		}
 	}
-	return nil
+	return 0,errNoMeta
 }
 
 func jekyllToGor(filename string){
@@ -178,4 +208,25 @@ func jekyllToGor(filename string){
 	myGor.tags = myJekyll.tags
 	myGor.tagline = myJekyll.tagline
 	myGor.getDate(filename)
+	//fmt.Println(myGor)
+}
+
+//There use refelect should be more pithy
+func writeFile(file *os.File,lines []string) error{
+	file.Write([]byte("---\n"))
+	file.Write([]byte("date: " + myGor.date + "\n"))
+	file.Write([]byte("layout: " + myGor.layout + "\n"))
+	file.Write([]byte("title: " + myGor.title + "\n"))
+	file.Write([]byte("tagline: " + myGor.tagline + "\n"))
+	file.Write([]byte("categories:\n"))
+	file.Write([]byte("- " + myGor.categories[0] + "\n"))
+	file.Write([]byte("tags:\n"))
+	for _,tag := range myGor.tags{
+		file.Write([]byte("- " + tag + "\n"))
+	}
+	file.Write([]byte("---\n"))
+	for _,line := range lines[numMeta + 1:]{
+		file.Write([]byte(line + "\n"))
+	}
+	return nil
 }
