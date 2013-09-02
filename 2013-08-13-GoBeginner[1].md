@@ -1,11 +1,13 @@
 ---
-layout: post
-title: 初识Go语言[1]
-category : Programming Language
-tagline: "我对Go语言语法的一些看法"
-tags : [Go]
+date: 2013-08-13
+layout:  post
+title:  初识Go语言[1]
+tagline:  "我对Go语言语法的一些看法"
+categories:
+-  Programming Language
+tags:
+- Go
 ---
-{% include JB/setup %}
 
 &emsp;作为一个刚接触Go没几天的Gopher,没什么能力对其原理和高级用法做出分析和评价，姑且就对其语法形式谈谈我的看法，也算是对我这几天来的一个总结和回顾，姑妄言之，大家莫怪。
 
@@ -49,5 +51,6 @@ tags : [Go]
 &emsp;今天我们就先谈论到这，明天我们说说Go语言的interface，error，和 OOP特性。
 
  [返回顶部]({{ BASE_PATH }}{{ site.categories.usage.first.url }})
+
 
 
