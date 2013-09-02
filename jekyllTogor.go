@@ -26,6 +26,7 @@ type Gor struct {
 	date   string
 	title  string
 	//permalink string
+	tagline string
 	categories []string
 	tags       []string
 }
@@ -35,19 +36,42 @@ type Gor struct {
 //In face the metaEoF should be the second "---"
 var metaEOF string = "{% include JB/setup %}"
 
-func Newjekyll() *Jekyll {
+func NewJekyll() *Jekyll {
 	return &Jekyll{layout: "post"}
 }
 func NewGor() *Gor {
 	return &Gor{layout: "post"}
 }
 
+func ResetJekyll(j *Jekyll){
+		j.layout = "post"
+		j.title = ""
+		j.category = ""
+		j.tagline = ""
+		j.tags = []string{}
+}
+
+func ResetGor(g * Gor){
+	g.layout = "post"
+	g.title = ""
+	g.date = ""
+	g.categories = make([]string,1)
+	g.tags = []string{}
+	g.tagline = ""
+}
+
+func (g *Gor)getDate(filepath string){
+	paths := strings.Split(filepath, "/")
+	fname := paths[len(paths) - 1]
+	fmt.Println(fname)
+
+}
 var myJekyll *Jekyll
 var myGor *Gor
 
 func main() {
 	if len(os.Args) > 1 {
-		myJekyll = Newjekyll()
+		myJekyll = NewJekyll()
 		myGor = NewGor()
 		err := Tree(os.Args[1], 1)
 		if err != nil {
@@ -111,18 +135,18 @@ func Dealwith(fpath string) error {
 
 	content, _ := ioutil.ReadFile(file.Name())
 	lines := strings.Split(string(content), "\n")
-	CreatJekyll(lines)
-
+	parseJekyll(lines)
+	jekyllToGor(file.Name())	
 	//	file.Write(s)
 	return nil
 }
 
-func CreatJekyll(lines []string) {
-	//myJekyll =
+func parseJekyll(lines []string) error{
+	ResetJekyll(myJekyll)
 	for _,line := range lines{
 		//fmt.Println(line)
 		if strings.Contains(line, metaEOF){
-			return
+			return nil
 		}
 		meta := strings.Split(line, ":")
 		switch{
@@ -138,10 +162,20 @@ func CreatJekyll(lines []string) {
 			meta[1] = strings.TrimSpace(meta[1])
 			meta[1] = strings.TrimLeft(meta[1],"[")
 			meta[1] = strings.TrimRight(meta[1],"]")
-			fmt.Println(meta[1])
+			//fmt.Println(meta[1])
 			data := strings.Split(meta[1], ",")
 			myJekyll.tags = data
 		}
 	}
-	fmt.Println(myJekyll)
+	return nil
+}
+
+func jekyllToGor(filename string){
+	ResetGor(myGor)
+	myGor.layout = myJekyll.layout
+	myGor.title = myJekyll.title
+	myGor.categories[0] = myJekyll.category
+	myGor.tags = myJekyll.tags
+	myGor.tagline = myJekyll.tagline
+	myGor.getDate(filename)
 }
