@@ -1,0 +1,115 @@
+---
+layout: post
+title: HDOJ 4509  湫湫系列故事——减肥记II
+category : ACM
+tagline: ""
+tags : [模拟]
+---
+<div class="panel_title" align="left" style="font-size:18px; height:38px; font-family:Arial; font-weight:bold; color:rgb(124,169,237); padding-bottom:0px; padding-top:0px; padding-left:14px; padding-right:14px; background-color:transparent">
+	Problem Description
+</div>
+<div class="panel_content" style="font-size:14px; height:auto; font-family:'Times New Roman'; padding-bottom:0px; text-align:left; padding-top:0px; padding-left:20px; margin:0px; padding-right:20px">
+	　　虽然制定了减肥食谱，但是湫湫显然克制不住吃货的本能，根本没有按照食谱行动！<br />
+	于是，结果显而易见…<br />
+	　　但是没有什么能难倒高智商美女湫湫的，她决定另寻对策——吃没关系，咱吃进去再运动运动消耗掉不就好了？<br />
+	　　湫湫在内心咆哮：“我真是天才啊~\(≧▽≦)/~”<br />
+	<br />
+	　　可是，大家要知道，过年回家多忙啊——帮忙家里做大扫除，看电影，看小说，高中同学聚餐，初中同学聚餐，小学同学聚餐，吃东西，睡觉，吃东西，睡觉，吃东西，睡觉……所以锻炼得抽着时间来。<br />
+	<br />
+	　　但是，湫湫实在太忙了，所以没时间去算一天有多少时间可以用于锻炼，现在她把每日行程告诉你，拜托你帮忙算算吧~<br />
+	<br />
+	　　皮埃斯：一天是24小时，每小时60分钟
+</div>
+<div class="panel_bottom" style="font-size:14px; height:auto; font-family:'Times New Roman'; margin:0px">
+	&nbsp;
+</div>
+<br style="font-size:14px; font-family:'Times New Roman'" />
+
+<div class="panel_title" align="left" style="font-size:18px; height:38px; font-family:Arial; font-weight:bold; color:rgb(124,169,237); padding-bottom:0px; padding-top:0px; padding-left:14px; padding-right:14px; background-color:transparent">
+	Input
+</div>
+<div class="panel_content" style="font-size:14px; height:auto; font-family:'Times New Roman'; padding-bottom:0px; text-align:left; padding-top:0px; padding-left:20px; margin:0px; padding-right:20px">
+	输入数据包括多组测试用例。<br />
+	每组测试数据首先是一个整数n，表示当天有n件事要做。&nbsp;<br />
+	接下来n行，第i行是第i件事的开始时间和结束时间，时间格式为HH:MM。<br />
+	<br />
+	[Technical Specification]<br />
+	1. 1 &lt;= n &lt;= 500000<br />
+	2. 00 &lt;= HH &lt;= 23<br />
+	3. 00 &lt;= MM &lt;= 59<br />
+	
+</div>
+<div class="panel_bottom" style="font-size:14px; height:auto; font-family:'Times New Roman'; margin:0px">
+	&nbsp;
+</div>
+<br style="font-size:14px; font-family:'Times New Roman'" />
+
+<div class="panel_title" align="left" style="font-size:18px; height:38px; font-family:Arial; font-weight:bold; color:rgb(124,169,237); padding-bottom:0px; padding-top:0px; padding-left:14px; padding-right:14px; background-color:transparent">
+	Output
+</div>
+<div class="panel_content" style="font-size:14px; height:auto; font-family:'Times New Roman'; padding-bottom:0px; text-align:left; padding-top:0px; padding-left:20px; margin:0px; padding-right:20px">
+	请输出一个整数，即湫湫当天可以用于锻炼的时间（单位分钟）
+</div>
+<div class="panel_bottom" style="font-size:14px; height:auto; font-family:'Times New Roman'; margin:0px">
+	&nbsp;
+</div>
+<br style="font-size:14px; font-family:'Times New Roman'" />
+
+<div class="panel_title" align="left" style="font-size:18px; height:38px; font-family:Arial; font-weight:bold; color:rgb(124,169,237); padding-bottom:0px; padding-top:0px; padding-left:14px; padding-right:14px; background-color:transparent">
+	Sample Input
+</div>
+<div class="panel_content" style="font-size:14px; height:auto; font-family:'Times New Roman'; padding-bottom:0px; text-align:left; padding-top:0px; padding-left:20px; margin:0px; padding-right:20px">
+	<pre style="margin-bottom:0px; margin-top:0px"><div style="font-family:'Courier New',Courier,monospace">1
+15:36 18:40
+4
+01:35 10:36
+04:54 22:36
+10:18 18:40
+11:47 17:53</div></pre>
+</div>
+<div class="panel_bottom" style="font-size:14px; height:auto; font-family:'Times New Roman'; margin:0px">
+	&nbsp;
+</div>
+<br style="font-size:14px; font-family:'Times New Roman'" />
+
+<div class="panel_title" align="left" style="font-size:18px; height:38px; font-family:Arial; font-weight:bold; color:rgb(124,169,237); padding-bottom:0px; padding-top:0px; padding-left:14px; padding-right:14px; background-color:transparent">
+	Sample Output
+</div>
+<div class="panel_content" style="font-size:14px; height:auto; font-family:'Times New Roman'; padding-bottom:0px; text-align:left; padding-top:0px; padding-left:20px; margin:0px; padding-right:20px">
+	<pre style="margin-bottom:0px; margin-top:0px"><div style="font-family:'Courier New',Courier,monospace">1256
+179
+
+<div style="border-top:rgb(183,203,255) 1px dashed; font-family:'Times New Roman'; border-right:rgb(183,203,255) 1px dashed; border-bottom:rgb(183,203,255) 1px dashed; padding-bottom:6px; padding-top:6px; padding-left:6px; border-left:rgb(183,203,255) 1px dashed; padding-right:6px; background-color:rgb(244,251,255)"><div style="font-family:Arial; border-bottom:rgb(183,203,255) 1px dashed; font-weight:bold; color:rgb(124,169,237)"><em>Hint</em></div> 
+大量输入，建议用scanf读数据。
+</div><span style="font-size:1px"> </span> </div></pre>
+</div>
+<div class="panel_bottom" style="font-size:14px; height:auto; font-family:'Times New Roman'; margin:0px">
+	&nbsp;
+</div>
+<br style="font-size:14px; font-family:'Times New Roman'" />
+
+<div class="panel_content" style="font-size:14px; height:auto; font-family:'Times New Roman'; padding-bottom:0px; text-align:left; padding-top:0px; padding-left:20px; margin:0px; padding-right:20px">
+	<span style="font-size:24px"><strong>题解：</strong></span>
+</div>
+<div class="panel_bottom" style="font-size:14px; height:auto; font-family:'Times New Roman'; margin:0px">
+	&nbsp;
+</div>
+<p>
+	<span style="font-family:KaiTi_GB2312; font-size:24px"><strong>&nbsp; &nbsp; 由于时间是以分钟为单位，我们可以把时间看做 24 * 60 个 点 初值为 0</strong></span>
+</p>
+<p>
+	<span style="font-family:KaiTi_GB2312; font-size:24px"><strong>&nbsp; &nbsp; 若某个点被占用， 记为 1</strong></span>
+</p>
+<p>
+	<span style="font-family:KaiTi_GB2312; font-size:24px"><strong>&nbsp; &nbsp;最后统计 为 0 点 的 个数 即为可用时间</strong></span>
+</p>
+<p>
+	<span style="font-family:KaiTi_GB2312; font-size:24px"><strong>&nbsp; &nbsp; &nbsp;</strong></span>
+</p>
+<p>
+	<br />
+	
+</p>
+<p>
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+</p>

@@ -1,0 +1,97 @@
+---
+date: 2013-04-09
+layout:  post
+title:  HOJ 1031 Piggy-Bank
+tagline:  ""
+categories:
+-  ACM
+tags:
+- DP
+---
+<p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; line-height:20px; font-size:14px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background-color:rgb(247,247,247)">
+	Before ACM can do anything, a&nbsp;budget must be prepared and the necessary financial support obtained. The main income for this action comes from Irreversibly Bound Money (IBM). The idea behind is simple. Whenever some ACM member has any small money, he takes all the coins and throws them into a piggy-bank. You know that this process is irreversible, the coins cannot be removed without breaking the pig. After a sufficiently long time, there should be enough cash in the piggy-bank to pay everything that needs to be paid.
+</p>
+<p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; line-height:20px; font-size:14px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background-color:rgb(247,247,247)">
+	But there is a big problem with piggy-banks. It is not possible to determine how much money is inside. So we might break the pig into pieces only to find out that there is not enough money. Clearly, we want to avoid this unpleasant situation. The only possibility is to weigh the piggy-bank and try to guess how many coins are inside. Assume that we are able to determine the weight of the pig exactly and that we know the weights of all coins of a given currency. Then there is some minimum amount of money in the piggy-bank that we can guarantee. Your task is to find out this worst case and determine the minimum amount of cash inside the piggy-bank. We need your help. No more prematurely broken pigs!
+</p>
+<span style="margin:0px; padding:0px; font-size:18px; line-height:28px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background-color:rgb(247,247,247)">Input Specification</span><span style="color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; line-height:20px; background-color:rgb(247,247,247)"></span>
+<p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; line-height:20px; font-size:14px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background-color:rgb(247,247,247)">
+	The input consists of&nbsp;<var style="margin:0px; padding:0px">T</var>&nbsp;test cases. The number of them (<var style="margin:0px; padding:0px">T</var>) is given on the first line of the input file. Each test case begins with a line containing two integers&nbsp;<var style="margin:0px; padding:0px">E</var>&nbsp;and&nbsp;<var style="margin:0px; padding:0px">F</var>. They indicate the weight of an empty pig and of the pig filled with coins. Both weights are given in grams. No pig will weigh more than 10 kg, that means&nbsp;<var style="margin:0px; padding:0px">1 &lt;= E &lt;= F &lt;= 10000</var>. On the second line of each test case, there is an integer number&nbsp;<var style="margin:0px; padding:0px">N</var>&nbsp;(<var style="margin:0px; padding:0px">1 &lt;= N &lt;= 500</var>) that gives the number of various coins used in the given currency. Following this are exactly&nbsp;<var style="margin:0px; padding:0px">N</var>&nbsp;lines, each specifying one coin type. These lines contain two integers each,&nbsp;<var style="margin:0px; padding:0px">P</var>and&nbsp;<var style="margin:0px; padding:0px">W</var>&nbsp;(<var style="margin:0px; padding:0px">1 &lt;= P &lt;= 50000</var>,&nbsp;<var style="margin:0px; padding:0px">1 &lt;= W &lt;=10000</var>).&nbsp;<var style="margin:0px; padding:0px">P</var>&nbsp;is the value of the coin in monetary units,&nbsp;<var style="margin:0px; padding:0px">W</var>&nbsp;is it's weight in grams.
+</p>
+<span style="margin:0px; padding:0px; font-size:18px; line-height:28px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background-color:rgb(247,247,247)">Output Specification</span><span style="color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; line-height:20px; background-color:rgb(247,247,247)"></span>
+<p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; line-height:20px; font-size:14px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background-color:rgb(247,247,247)">
+	Print exactly one line of output for each test case. The line must contain the&nbsp;sentence &quot;<code style="margin:0px; padding:0px">The minimum amount of money in the piggy-bank is&nbsp;<var style="margin:0px; padding:0px">X</var>.</code>&nbsp;where&nbsp;<var style="margin:0px; padding:0px">X</var>&nbsp;is the minimum amount of money that can be achieved using coins with the given total weight. If the weight cannot be reached exactly, print a&nbsp;line &quot;<code style="margin:0px; padding:0px">This is impossible.</code>.
+</p>
+<span style="margin:0px; padding:0px; font-size:18px; line-height:28px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background-color:rgb(247,247,247)">Sample Input:</span>
+<pre style="margin-top:0px; margin-bottom:0px; padding:5px; background-color:rgb(224,224,224); font-size:14px; line-height:16px; overflow:auto; font-family:Consolas,'Lucida Console','Andale Mono','Bitstream Vera Sans Mono','Courier New',Courier; color:rgb(51,51,51)">3
+10 110
+2
+1 1
+30 50
+10 110
+2
+1 1
+50 30
+1 6
+2
+10 3
+20 4
+</pre>
+<span style="margin:0px; padding:0px; font-size:18px; line-height:28px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background-color:rgb(247,247,247)">Sample Output:</span>
+<pre style="margin-top:0px; margin-bottom:0px; padding:5px; background-color:rgb(224,224,224); font-size:14px; line-height:16px; overflow:auto; font-family:Consolas,'Lucida Console','Andale Mono','Bitstream Vera Sans Mono','Courier New',Courier; color:rgb(51,51,51)">The minimum amount of money in the piggy-bank is 60.
+The minimum amount of money in the piggy-bank is 100.
+This is impossible.</pre>
+<p>
+	<span style="font-size:24px"><br />
+	</span>
+</p>
+<p>
+	<span style="font-size:24px">题解：</span>
+</p>
+<p>
+	<span style="font-size:24px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-size:18px">完全背包问题,可以看看《背包问题九讲》</span>
+</p>
+<p>
+	<span style="font-size:18px"></span>
+</p>
+<pre name="code" class="cpp">#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstring&gt;
+const int N = 505;
+const int inf = 1000000000;
+int w[N],p[N];
+int dp[10005];
+int main(){
+	int cases,e,f,n;
+	scanf(&quot;%d&quot;,&amp;cases);
+	while(cases --){
+		
+		scanf(&quot;%d%d&quot;,&amp;e,&amp;f);
+		for(int i = 1; i &lt;= f; i ++)
+		   dp[i] = inf;
+        dp[0] = 0;
+		f -= e;
+		scanf(&quot;%d&quot;,&amp;n);
+		for(int i = 1; i &lt;= n; i++)
+			scanf(&quot;%d%d&quot;,&amp;p[i],&amp;w[i]);
+		for(int i = 1; i &lt;= n ; i++)
+			for(int j = w[i]; j &lt;= f; j++)
+				if(dp[j - w[i]] + p[i] &lt; dp[j]) dp[j] = dp[j - w[i]] + p[i];
+		if(dp[f] == inf) 
+		    printf(&quot;This is impossible.\n&quot;);
+		else
+		    printf(&quot;The minimum amount of money in the piggy-bank is %d.\n&quot;,dp[f]);	        
+	}
+    return 0;
+}	
+		
+</pre>
+<br />
+<br />
+
+<p>
+</p>
+<p>
+	<br />
+	
+</p>

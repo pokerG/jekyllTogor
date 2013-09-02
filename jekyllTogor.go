@@ -111,7 +111,7 @@ func Tree(dirname string, curHier int) error {
 		} else {
 			b := []byte(fileInfo.Name())
 			//fmt.Println(fileInfo.Name())
-			matched, _ := regexp.Match("[.](md)$", b)
+			matched, _ := regexp.Match("[.](md|html)$", b)
 			//fmt.Println(matched)
 			if matched {
 				err := Dealwith(filepath.Join(dirAbs, fileInfo.Name()))

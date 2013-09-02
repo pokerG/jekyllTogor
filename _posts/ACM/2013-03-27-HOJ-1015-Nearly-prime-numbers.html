@@ -1,0 +1,75 @@
+---
+date: 2013-03-27
+layout:  post
+title:  HOJ 1015  Nearly prime numbers
+tagline:  ""
+categories:
+-  ACM
+tags:
+- 数论
+---
+<p style="">
+	Nearly prime number is an integer positive number for which it is possible to find such primes<span>&nbsp;</span><span style="padding-bottom:0px; padding-top:0px; padding-left:0px; margin:0px; padding-right:0px">P<sub style="padding-bottom:0px; padding-top:0px; padding-left:0px; margin:0px; padding-right:0px">1</sub></span><span>&nbsp;</span>and<span>&nbsp;</span><span style="padding-bottom:0px; padding-top:0px; padding-left:0px; margin:0px; padding-right:0px">P<sub style="padding-bottom:0px; padding-top:0px; padding-left:0px; margin:0px; padding-right:0px">2</sub></span><span>&nbsp;</span>that given number is equal to<span style="padding-bottom:0px; padding-top:0px; padding-left:0px; margin:0px; padding-right:0px">P<sub style="padding-bottom:0px; padding-top:0px; padding-left:0px; margin:0px; padding-right:0px">1</sub>*P<sub style="padding-bottom:0px; padding-top:0px; padding-left:0px; margin:0px; padding-right:0px">2</sub></span>. There is given a sequence on<span>&nbsp;</span><span style="padding-bottom:0px; padding-top:0px; padding-left:0px; margin:0px; padding-right:0px">N</span><span>&nbsp;</span>integer positive numbers, you are to write a program that prints Yes if given number is nearly prime and No otherwise.
+</p>
+Input<span style=""></span>
+<p style="">
+	Input consists of<span>&nbsp;</span><span style="padding-bottom:0px; padding-top:0px; padding-left:0px; margin:0px; padding-right:0px">N+</span>1 numbers. First is positive integer<span>&nbsp;</span><span style="padding-bottom:0px; padding-top:0px; padding-left:0px; margin:0px; padding-right:0px">N (1&lt;=N&lt;=50000)</span>. Next<span>&nbsp;</span><span style="padding-bottom:0px; padding-top:0px; padding-left:0px; margin:0px; padding-right:0px">N</span><span>&nbsp;</span>numbers followed by<span>&nbsp;</span><span style="padding-bottom:0px; padding-top:0px; padding-left:0px; margin:0px; padding-right:0px">N</span>. Each number is not greater than<span>&nbsp;</span><span style="padding-bottom:0px; padding-top:0px; padding-left:0px; margin:0px; padding-right:0px">10<sup style="padding-bottom:0px; padding-top:0px; padding-left:0px; margin:0px; padding-right:0px">9</sup></span>. All numbers separated by whitespace(s).
+</p>
+Output<span style=""></span>
+<p style="">
+	Write a line in output for each number of given sequence. Write Yes if given number is nearly prime and No in other case.
+</p>
+Sample Input<span style=""></span>
+<pre style="">1
+6
+</pre>
+Sample Output<span style=""></span>
+<p style="">
+	Yes
+</p>
+<p>
+	&nbsp;
+</p>
+<p>
+	&nbsp;
+</p>
+<pre class="cpp" name="code">#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+bool isPrime(int n){
+	if(n == 2)
+	   return true;
+    if(n % 2 == 0)
+       return false;
+	for(int i = 3; i * i &lt;= n; i += 2)
+		if(n % i == 0)
+			return false;
+	return true;
+}
+bool isNearlyPrime(int n){
+    if(n % 2 == 0 &amp;&amp; isPrime(n / 2))
+        return true;
+    for(int i = 3; i * i &lt;= n; i += 2)
+        if(n % i == 0 &amp;&amp; isPrime(i))
+            if(isPrime(n / i))
+              return true;
+    return false;
+}
+int main(){
+	int n;
+	int a[50005];
+	while(scanf(&quot;%d&quot;,&amp;n) != EOF){
+		for(int i = 0; i &lt; n; i++)
+		  scanf(&quot;%d&quot;,&amp;a[i]);
+		for(int i = 0; i &lt; n; i++){
+			if(isNearlyPrime(a[i]))
+				printf(&quot;Yes\n&quot;);
+			else
+				printf(&quot;No\n&quot;);
+		}
+	}
+	return 0;
+}</pre>
+<p>
+	<br />
+	&nbsp;
+</p>

@@ -1,0 +1,117 @@
+---
+date: 2013-04-09
+layout:  post
+title:  HOJ 2033 Ubiquitous Religions
+tagline:  ""
+categories:
+-  ACM
+tags:
+- 数据结构
+---
+<p>
+	<span style="background-color:rgb(247,247,247); color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:14px; line-height:20px">There are so many different religions in the world today that it is difficult to keep track of them all. You are interested in finding out how many different religions students in your university believe in.</span>
+</p>
+<p>
+</p>
+<p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; line-height:20px; font-size:14px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background-color:rgb(247,247,247)">
+	You know that there are n students in your university (0&nbsp;&lt;&nbsp;<span style="margin:0px; padding:0px">n</span>&nbsp;≤&nbsp;50000). It is infeasible for you to ask every student their religious beliefs. Furthermore, many students are not comfortable expressing their beliefs. One way to avoid these problems is to ask&nbsp;<span style="margin:0px; padding:0px">m</span>&nbsp;(0&nbsp;≤&nbsp;<span style="margin:0px; padding:0px">m</span>&nbsp;≤&nbsp;&nbsp;<span style="margin:0px; padding:0px">n</span>(<span style="margin:0px; padding:0px">n</span>-1)/2) pairs of students and ask them whether they believe in the same religion (e.g. they may know if they both attend the same church). From this data, you may not know what each person believes in, but you can get an idea of the upper bound of how many different religions can be possibly represented on campus. You may assume that each student subscribes to at most one religion.
+</p>
+<p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; line-height:20px; font-size:14px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background-color:rgb(247,247,247)">
+	The input consists of a number of cases. Each case starts with a line specifying the integers&nbsp;<span style="margin:0px; padding:0px">n</span>and&nbsp;<span style="margin:0px; padding:0px">m</span>. The next&nbsp;<span style="margin:0px; padding:0px">m</span>&nbsp;lines each consists of two integers i and j, specifying that students i and j believe in the same religion. The students are numbered 1 to&nbsp;<span style="margin:0px; padding:0px">n</span>. The end of input is specified by a line in which&nbsp;<span style="margin:0px; padding:0px">n</span>&nbsp;=&nbsp;<span style="margin:0px; padding:0px">m</span>&nbsp;= 0.
+</p>
+<p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; line-height:20px; font-size:14px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background-color:rgb(247,247,247)">
+	For each test case, print on a single line the case number (starting with 1) followed by the maximum number of different religions that the students in the university believe in.
+</p>
+<p style="margin-top:0px; margin-bottom:5px; padding-top:0px; padding-bottom:0px; line-height:20px; font-size:14px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background-color:rgb(247,247,247)">
+	<span style="margin:0px; padding:0px; font-size:18px; line-height:28px">Sample Input</span>
+</p>
+<pre style="margin-top:0px; margin-bottom:0px; padding:5px; background-color:rgb(224,224,224); font-size:14px; line-height:16px; overflow:auto; font-family:Consolas,'Lucida Console','Andale Mono','Bitstream Vera Sans Mono','Courier New',Courier; color:rgb(51,51,51)">10 9
+1 2
+1 3
+1 4
+1 5
+1 6
+1 7
+1 8
+1 9
+1 10
+10 4
+2 3
+4 5
+4 8
+5 8
+0 0
+</pre>
+<span style="margin:0px; padding:0px; font-size:18px; line-height:28px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; background-color:rgb(247,247,247)">Sample Output</span><span style="color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; line-height:20px; background-color:rgb(247,247,247)"></span>
+<pre style="margin-top:0px; margin-bottom:0px; padding:5px; background-color:rgb(224,224,224); font-size:14px; line-height:16px; overflow:auto; font-family:Consolas,'Lucida Console','Andale Mono','Bitstream Vera Sans Mono','Courier New',Courier; color:rgb(51,51,51)">Case 1: 1
+Case 2: 7
+</pre>
+<hr style="margin:0px; padding:0px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; line-height:20px; background-color:rgb(247,247,247)" />
+<span style="color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; line-height:20px; background-color:rgb(247,247,247)">Author:&nbsp;</span><span style="margin:0px; padding:0px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; line-height:20px; background-color:rgb(247,247,247)">Howard Cheng</span><br />
+
+<p>
+	<span style="margin:0px; padding:0px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; font-size:16px; line-height:20px; background-color:rgb(247,247,247)"><br />
+	</span>
+</p>
+<p>
+	<span style="margin:0px; padding:0px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; line-height:20px; background-color:rgb(247,247,247)"><span style="font-size:24px">题解：</span></span>
+</p>
+<p>
+	<span style="margin:0px; padding:0px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; line-height:20px; background-color:rgb(247,247,247)"><span style="font-size:24px">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span style="font-size:18px">并查集，判断有多少个祖先，用一个数组记录访问状态即可。</span></span>
+</p>
+<p>
+	<span style="margin:0px; padding:0px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; line-height:20px; background-color:rgb(247,247,247)"><span style="font-size:18px"><br />
+	</span></span>
+</p>
+<pre name="code" class="cpp">#include &lt;cstdio&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cstring&gt;
+int set[50005];
+bool vis[50005];
+int findset(int x){
+	if(x == set[x])
+	   return x;
+	set[x] = findset(set[x]);
+	return set[x];
+}
+int main(){
+	int n,m;
+	int cases = 0;
+	while(scanf(&quot;%d%d&quot;,&amp;n,&amp;m) &amp;&amp; n &amp;&amp; m){
+		cases ++;
+		for(int i = 1; i &lt;= n; i++)
+			set[i] = i;
+	        int fx,fy;
+	        for(int i = 1; i &lt;= m; i++){
+		        scanf(&quot;%d%d&quot;,&amp;fx,&amp;fy);
+		        fx = findset(fx);
+		        fy = findset(fy);
+		        if(fx &lt; fy)
+			     set[fy] = fx;
+		        else
+			     set[fx] = fy;
+		}
+	        memset(vis,false,sizeof(vis));
+	        int res = 0;
+	        for(int i = 1; i &lt;= n; i++){
+		         if(vis[findset(i)] == false){
+                     res ++;
+		             vis[findset(i)] = true;
+			 }
+		}
+                printf(&quot;Case %d: %d\n&quot;,cases,res);
+	}
+        return 0;
+}	
+</pre>
+<br />
+<br />
+<br />
+<br />
+
+<p>
+</p>
+<p>
+	<span style="margin:0px; padding:0px; color:rgb(51,51,51); font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; line-height:20px; background-color:rgb(247,247,247)"><span style="font-size:24px"><br />
+	</span></span>
+</p>
